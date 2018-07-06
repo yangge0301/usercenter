@@ -92,7 +92,7 @@ public class ServiceInitController {
                 else{
                     //处理用户消息
                     InputStream inputStream = request.getInputStream();
-                    String respXml = coreService.processRequest(inputStream,signature);
+                    String respXml = coreService.processRequest(inputStream,signature,timestamp,nonce,echostr);
                     logger.info("returnMsg:===>>signature="+signature+",["+respXml+"]");
                     out.write(respXml);
                 }

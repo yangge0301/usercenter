@@ -32,7 +32,7 @@ public class CoreService {
 	 * @return xml
 	 * @throws FileNotFoundException
 	 */
-	public String processRequest(InputStream inputStream,String signature) {
+	public String processRequest(InputStream inputStream,String signature,String timeStamp,String nonce,String echostr) {
 		Date utilDate = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String str = sdf.format(utilDate);
