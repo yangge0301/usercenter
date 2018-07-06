@@ -9,7 +9,7 @@ public class ConstantParam {
 
     public final  static String welcomeText=
             "您好呀，很高兴和你成为朋友~沃特权圈圈随时为您服务，您可在对话框内输入以下数字进行解答\n" +
-                    "【1】拆红包特权\n" +
+                    "【1】拆红包享特权\n" +
                     "【2】精彩权益\n" +
                     "【3】绑定手机号\n" +
                     "【4】我的卡券包\n" +
@@ -68,17 +68,17 @@ public class ConstantParam {
                 ">>><a href='"+ConstantParam.findRedUrl("sjbd")+"'>绑定手机</a>→免费成为会员，超多羊毛等你来薅~\n" +
                 "-------------------------\n"+
                 ">>>快来瞅瞅小伙伴们都爱pick的热门活动吧：\n" +
-                "1.<a href='"+ConstantParam.findRedUrl("qyhy")+"'>拆红包享特权☞看这里</a>\n" +
+                "1.<a href='"+ConstantParam.findRedUrl("qyhy")+"'>拆红包享特权?看这里</a>\n" +
                 ""+
-                "2.<a href='"+ConstantParam.findRedUrl("ofoq")+"'>ofo免费骑行☞看这里</a>\n" +
-                "3.<a href='"+ConstantParam.findRedUrl("ykkq")+"'>优酷免流看球☞看这里</a>\n" +
-                "4.<a href='"+ConstantParam.findRedUrl("cydx")+"'>畅越/低消送特权☞看这里</a>\n" +
-                "5.<a href='"+ConstantParam.findRedUrl("gdym")+"'>更多活动\uD83D\uDC11☞看这里</a>\n" +
+                "2.<a href='"+ConstantParam.findRedUrl("ofoq")+"'>ofo免费骑行?看这里</a>\n" +
+                "3.<a href='"+ConstantParam.findRedUrl("ykkq")+"'>优酷免流看球?看这里</a>\n" +
+                "4.<a href='"+ConstantParam.findRedUrl("cydx")+"'>畅越/低消送特权?看这里</a>\n" +
+                "5.<a href='"+ConstantParam.findRedUrl("gdym")+"'>更多活动\uD83D\uDC11?看这里</a>\n" +
                 "-------------------------\n"+
                 "更多权益和羊毛尽在下方菜单栏哦！\n" );
         keyWords.put("导航", " " +
                 "您好呀，很高兴和你成为朋友~沃特权圈圈随时为您服务，您可在对话框内输入以下数字进行解答\n" +
-                "【1】拆红包特权\n" +
+                "【1】拆红包享特权\n" +
                 "【2】精彩权益\n" +
                 "【3】绑定手机号\n" +
                 "【4】我的卡券包\n" +
@@ -86,7 +86,7 @@ public class ConstantParam {
                 "【6】畅越/低消专区");
         keyWords.put("你好", " " +
                 "您好呀，很高兴和你成为朋友~沃特权圈圈随时为您服务，您可在对话框内输入以下数字进行解答\n" +
-                "【1】拆红包特权\n" +
+                "【1】拆红包享特权\n" +
                 "【2】精彩权益\n" +
                 "【3】绑定手机号\n" +
                 "【4】我的卡券包\n" +
@@ -94,7 +94,7 @@ public class ConstantParam {
                 "【6】畅越/低消专区");
         keyWords.put("hello", " " +
                 "您好呀，很高兴和你成为朋友~沃特权圈圈随时为您服务，您可在对话框内输入以下数字进行解答\n" +
-                "【1】拆红包特权\n" +
+                "【1】拆红包享特权\n" +
                 "【2】精彩权益\n" +
                 "【3】绑定手机号\n" +
                 "【4】我的卡券包\n" +
@@ -102,7 +102,7 @@ public class ConstantParam {
                 "【6】畅越/低消专区");
         keyWords.put("hi", " " +
                 "您好呀，很高兴和你成为朋友~沃特权圈圈随时为您服务，您可在对话框内输入以下数字进行解答\n" +
-                "【1】拆红包特权\n" +
+                "【1】拆红包享特权\n" +
                 "【2】精彩权益\n" +
                 "【3】绑定手机号\n" +
                 "【4】我的卡券包\n" +
@@ -110,15 +110,15 @@ public class ConstantParam {
                 "【6】畅越/低消专区");
         keyWords.put("else", " " +
                 "您好呀，很高兴和你成为朋友~沃特权圈圈随时为您服务，您可在对话框内输入以下数字进行解答\n" +
-                "【1】拆红包特权\n" +
+                "【1】拆红包享特权\n" +
                 "【2】精彩权益\n" +
                 "【3】绑定手机号\n" +
                 "【4】我的卡券包\n" +
                 "【5】问题咨询\n" +
                 "【6】畅越/低消专区");
 
-        keyWords.put("【1】拆红包特权",
-                        "拆红包，低至15.99元，享31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
+        keyWords.put("【1】拆红包享特权",
+                "拆红包，低至15.99元，享31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
         keyWords.put("1",
                 "拆红包，低至15.99元，享31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
         keyWords.put("【1】",
