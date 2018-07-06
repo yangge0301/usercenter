@@ -9,11 +9,12 @@ public class ConstantParam {
 
     public final  static String welcomeText=
             "您好呀，很高兴和你成为朋友~沃特权圈圈随时为您服务，您可在对话框内输入以下数字进行解答\n" +
-                    "【1】精彩权益\n" +
-                    "【2】绑定手机号\n" +
-                    "【3】我的卡券包\n" +
-                    "【4】问题咨询\n" +
-                    "【5】畅越/低消专区";
+                    "【1】拆红包特权\n" +
+                    "【2】精彩权益\n" +
+                    "【3】绑定手机号\n" +
+                    "【4】我的卡券包\n" +
+                    "【5】问题咨询\n" +
+                    "【6】畅越/低消专区";
 
     private static final Map<String, String> keyWords = new HashMap<String, String>();
 
@@ -64,7 +65,7 @@ public class ConstantParam {
         //<a href='"+ConstantParam.findRedUrl("rmqy")+"'>【请点这里】</a>\n
         keyWords.put("subscribe", " Hi~ {USERNAME}，谢谢你长得这么好看还关注我\uD83D\uDE0A \n" +
                 "-------------------------\n"+
-                ">>><a href='"+ConstantParam.findRedUrl("sjbd")+"'>绑定手机</a>→超多羊毛等你来薅哦\n" +
+                ">>><a href='"+ConstantParam.findRedUrl("sjbd")+"'>绑定手机</a>→免费成为会员，超多羊毛等你来薅~\n" +
                 "-------------------------\n"+
                 ">>>快来瞅瞅小伙伴们都爱pick的热门活动吧：\n" +
                 "1.<a href='"+ConstantParam.findRedUrl("qyhy")+"'>拆红包享特权☞看这里</a>\n" +
@@ -117,15 +118,15 @@ public class ConstantParam {
                 "【6】畅越/低消专区");
 
         keyWords.put("【1】拆红包特权",
-                        "19.99元=31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
+                        "拆红包，低至15.99元，享31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
         keyWords.put("1",
-                "19.99元=31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
+                "拆红包，低至15.99元，享31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
         keyWords.put("【1】",
-                "19.99元=31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
+                "拆红包，低至15.99元，享31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
         keyWords.put("拆红包特权",
-                "19.99元=31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
+                "拆红包，低至15.99元，享31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
         keyWords.put("拆红包",
-                "19.99元=31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
+                "拆红包，低至15.99元，享31天腾讯视频会员+5GB全国流量，立即申请<a href='"+ConstantParam.findRedUrl("qyhy")+"'>【请点这里】</a>\n");
         keyWords.put("【2】精彩权益", "" +
                 "热门权益<a href='"+ConstantParam.findRedUrl("rmqy")+"'>【请点这里】</a>\n" +
                 "出行权益<a href='"+ConstantParam.findRedUrl("cxqy")+"'>【请点这里】</a>\n" +
