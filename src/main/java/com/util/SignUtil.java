@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
+import com.wxcrypt.AesException;
+import com.wxcrypt.WXBizMsgCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,4 +93,44 @@ public class SignUtil {
 		String s = new String(tempArr);
 		return s;
 	}
+
+	/**
+	 * 解密微信发过来的密文
+	 *
+	 * @return 加密后的内容
+	 */
+	public static String decryptMsg(String msgSignature,String timeStamp,String nonce,String encrypt_msg) {
+		WXBizMsgCrypt pc;
+		String result ="";
+		try {
+			pc = new WXBizMsgCrypt(token, ConstantParam.encodingAESKey, ConstantParam.appid);
+			result = pc.decryptMsg(msgSignature, timeStamp, nonce, encrypt_msg);
+		} catch (AesException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	/**
+	 * 加密给微信的消息内容
+	 * @param replayMsg
+	 * @param timeStamp
+	 * @param nonce
+	 * @return
+	 */
+	public static String ecryptMsg(String replayMsg,String timeStamp, String nonce) {
+		WXBizMsgCrypt pc;
+		String result ="";
+		try {
+			pc = new WXBizMsgCrypt(token, ConstantParam.encodingAESKey, ConstantParam.appid);
+			result = pc.encryptMsg(replayMsg, timeStamp, nonce);
+		} catch (AesException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
 }
