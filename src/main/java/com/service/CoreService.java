@@ -3,6 +3,7 @@ package com.service;
 import com.bean.messagebean.text.TextMessage;
 import com.util.ConstantParam;
 import com.util.MessageUtil;
+import com.wxcrypt.WXBizMsgCrypt;
 import org.slf4j.LoggerFactory;
 
 import net.sf.json.JSONObject;
@@ -32,15 +33,21 @@ public class CoreService {
 	 * @return xml
 	 * @throws FileNotFoundException
 	 */
-	public String processRequest(InputStream inputStream,String signature,String timeStamp,String nonce,String echostr) {
+	public String processRequest(InputStream inputStream,String signature,String timeStamp,String nonce,String echostr,Map<String, String> resMap,String model) {
 		Date utilDate = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String str = sdf.format(utilDate);
 		// xml格式的消息数据
 		String respXml = null;
+		Map<String, String> requestMap = null;
 		try {
-			// 调用parseXml方法解析请求消息
-			Map<String, String> requestMap = MessageUtil.parseXml(inputStream);
+			if(null!=model&&"aes".equals(model)){
+				requestMap = resMap;
+			}
+			else{
+				// 调用parseXml方法解析请求消息
+				requestMap = MessageUtil.parseXml(inputStream);
+			}
 			JSONObject jsonObject = JSONObject.fromObject(requestMap);
 			logger.info("reqMsg:===>>signature="+signature+",[" + jsonObject.toString() + "]");
 			// 发送方帐号

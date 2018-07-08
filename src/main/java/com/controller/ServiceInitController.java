@@ -3,6 +3,7 @@ package com.controller;
 import com.service.CoreService;
 import com.service.WxTokenGetService;
 import com.util.ConstantParam;
+import com.util.MessageUtil;
 import com.util.SignUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Map;
 
 
 @Controller
@@ -78,6 +80,8 @@ public class ServiceInitController {
 
         String signature = request.getParameter("signature");
         String timestamp = request.getParameter("timestamp");
+
+        String encryptType = request.getParameter("encrypt_type");
         String nonce = request.getParameter("nonce");
         String echostr = request.getParameter("echostr");
         logger.info("signature="+signature+"&timestamp="+timestamp+"&nonce="+nonce+"&echostr="+echostr);
@@ -90,9 +94,18 @@ public class ServiceInitController {
                     out.write(echostr);
                 }
                 else{
+                    Map<String, String> requestMap = null;
+                    if("aes".equals(encryptType)){
+
+                        requestMap=MessageUtil.parseXmlCrypt(request);
+
+                        String respXml=coreService.processRequest(null,signature,timestamp,nonce,echostr ,requestMap,"aes");
+                        respXml=MessageUtil.getWxCrypt().encryptMsg(respXml,timestamp,nonce);
+                        out.write(respXml);
+                    }
                     //处理用户消息
                     InputStream inputStream = request.getInputStream();
-                    String respXml = coreService.processRequest(inputStream,signature,timestamp,nonce,echostr);
+                    String respXml = coreService.processRequest(inputStream,signature,timestamp,nonce,echostr ,null ,"none");
                     logger.info("returnMsg:===>>signature="+signature+",["+respXml+"]");
                     out.write(respXml);
                 }

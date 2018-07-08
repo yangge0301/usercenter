@@ -1,15 +1,21 @@
 package com.util;
 
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.service.WxTokenGetService;
+import com.wxcrypt.AesException;
+import com.wxcrypt.WXBizMsgCrypt;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -26,15 +32,21 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 消息处理工具类
  *
  */
+@Service
 public class MessageUtil {
 
 	public static String TAG = "MessageUtil";
-
+	@Autowired
+	private static WxTokenGetService wxTokenGetService;
 	private static Logger logger = Logger.getLogger(MessageUtil.class);
 
 	// 请求消息类型：文本
@@ -43,7 +55,7 @@ public class MessageUtil {
 	/**
 	 * 解析微信发来的请求（XML）
 	 *
-	 * @param request
+	 * @param
 	 * @return Map<String, String>
 	 * @throws Exception
 	 */
@@ -171,4 +183,63 @@ public class MessageUtil {
 		return xstream.toXML(articlesMessage);
 	}
 
+	public static Map<String, String> parseXmlCrypt(HttpServletRequest request) throws Exception {
+		// 将解析结果存储在HashMap中
+		Map<String, String> map = new HashMap<String, String>();
+		// 从request中取得输入流
+		InputStream inputStream = request.getInputStream();
+		BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream));
+		String line;
+		StringBuffer buf=new StringBuffer();
+		while((line=reader.readLine())!=null){
+			buf.append(line);
+		}
+		reader.close();
+		inputStream.close();
+		WXBizMsgCrypt wxCeypt=MessageUtil.getWxCrypt();
+		// 微信加密签名
+		String msgSignature = request.getParameter("msg_signature");
+		// 时间戳
+		String timestamp = request.getParameter("timestamp");
+		// 随机数
+		String nonce = request.getParameter("nonce");
+		String respXml=wxCeypt.decryptMsg(msgSignature, timestamp, nonce, buf.toString());
+		//SAXReader reader = new SAXReader();
+		Document document =DocumentHelper.parseText(respXml);
+		// 得到xml根元素
+		Element root = document.getRootElement();
+		// 得到根元素的所有子节点
+		List<Element> elementList = root.elements();
+		// 遍历所有子节点
+		for (Element e : elementList)
+			map.put(e.getName(), e.getText());
+		// 释放资源
+
+		if(null!=inputStream){
+			inputStream.close();
+			inputStream = null;
+		}
+		return map;
+
+	}
+
+	public static WXBizMsgCrypt getWxCrypt() {
+
+		WXBizMsgCrypt crypt=null;
+
+		try {
+
+			crypt = new WXBizMsgCrypt(wxTokenGetService.tokenReq(),ConstantParam.encodingAESKey,ConstantParam.appid);
+
+		} catch (AesException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+		}
+
+		return crypt;
+
+	}
 }

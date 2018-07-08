@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConstantParam {
-    public final static String appid =  "wx4d316bf14ba29b78";
-    public final static String appsecret = "2879c99234da675f95e35f5280cb3612";
-    public final static String encodingAESKey = "LlhOCcXImWLVglmHfKBwERv4yzg3azbZV9VehDYRGIh";
+    public final static String appid =  "wx44a67de4ee5b4da1";
+    public final static String appsecret = "43bdbd7870662ca5b43c3876a8037821";
+    public final static String encodingAESKey = "aya89dKnqhERR6fFHatQU7LhdEhJ1CXFzfo2aCecsbT";
 
     public final  static String welcomeText=
             "您好呀，很高兴和你成为朋友~沃特权圈圈随时为您服务，您可在对话框内输入以下数字进行解答\n" +
