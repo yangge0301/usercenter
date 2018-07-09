@@ -2,7 +2,8 @@ package com.service;
 
 import com.bean.messagebean.text.TextMessage;
 import com.util.ConstantParam;
-import com.util.MessageUtil;
+import com.util.Dom4jUtil;
+import com.util.MessageDomUtil;
 import org.slf4j.LoggerFactory;
 
 import net.sf.json.JSONObject;
@@ -40,7 +41,7 @@ public class CoreService {
 		String respXml = null;
 		try {
 			// 调用parseXml方法解析请求消息
-			Map<String, String> requestMap = MessageUtil.parseXml(inputStream);
+			Map<String, String> requestMap = Dom4jUtil.xmlToMap(inputStream);
 			JSONObject jsonObject = JSONObject.fromObject(requestMap);
 			logger.info("reqMsg:===>>signature="+signature+",[" + jsonObject.toString() + "]");
 			// 发送方帐号
@@ -59,8 +60,8 @@ public class CoreService {
 //			MessageGetService.insertMessages(requestMap, msgType);
 
 			if ("event".equals(msgType) && "subscribe".equals(event)) {
-				respXml = MessageUtil.messageToXml(userSubscribe(event, fromUserName, toUserName));
-
+//				respXml =userSubscribe(event, fromUserName, toUserName).toString();
+				respXml = Dom4jUtil.xmlToString(Dom4jUtil.getXmlByBean(userSubscribe(event, fromUserName, toUserName)),"UTF-8",false);
 				String userName = wxTokenGetService.getUserInfo(fromUserName);
 				respXml = respXml.replaceAll("\\{USERNAME\\}",userName);
 //				logger.info(TAG + " subscribe: " + respXml);
@@ -80,7 +81,8 @@ public class CoreService {
 				}
 			}else if ("text".equals(msgType)) {
 				String content=requestMap.get("Content");
-				respXml = MessageUtil.messageToXml(userSubscribe(content, fromUserName, toUserName));
+//				respXml = userSubscribe(content, fromUserName, toUserName).toString();
+				respXml = Dom4jUtil.xmlToString(Dom4jUtil.getXmlByBean(userSubscribe(content, fromUserName, toUserName)),"UTF-8",false);
 				return respXml;
 			}
 		} catch (Exception e) {
@@ -96,8 +98,9 @@ public class CoreService {
 		TextMessage textMessage = new TextMessage();
 		textMessage.setToUserName(fromUserName);
 		textMessage.setFromUserName(toUserName);
-		textMessage.setCreateTime(new Date().getTime());
-		textMessage.setMsgType(MessageUtil.MESSAGE_TYPE_TEXT);
+		textMessage.setCreateTime(new Date().getTime()+"");
+		textMessage.setMsgType(MessageDomUtil.MESSAGE_TYPE_TEXT);
+		textMessage.setMsgId(System.currentTimeMillis()+"");
 		String res = ConstantParam.findResponseText(str);
 		if( res == null || res.equals("")){
 			res = ConstantParam.findResponseText("else");

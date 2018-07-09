@@ -18,7 +18,7 @@ public class BaseMessage {
 	/**
 	 * 消息创建时间 （整型）
 	 */
-	private long CreateTime;
+	private String CreateTime;
 
 	/**
 	 * 消息类型
@@ -28,7 +28,7 @@ public class BaseMessage {
 	/**
 	 * 消息ID，64位整型
 	 */
-	private long MsgId;
+	private String MsgId;
 
 	private String Event;
 	private String EventKey;
@@ -45,10 +45,10 @@ public class BaseMessage {
 	public void setFromUserName(String fromUserName) {
 		FromUserName = fromUserName;
 	}
-	public long getCreateTime() {
+	public String getCreateTime() {
 		return CreateTime;
 	}
-	public void setCreateTime(long createTime) {
+	public void setCreateTime(String createTime) {
 		CreateTime = createTime;
 	}
 	public String getMsgType() {
@@ -57,10 +57,10 @@ public class BaseMessage {
 	public void setMsgType(String msgType) {
 		MsgType = msgType;
 	}
-	public long getMsgId() {
+	public String getMsgId() {
 		return MsgId;
 	}
-	public void setMsgId(long msgId) {
+	public void setMsgId(String msgId) {
 		MsgId = msgId;
 	}
 	public String getEvent() {
