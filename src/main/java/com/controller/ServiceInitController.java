@@ -84,7 +84,7 @@ public class ServiceInitController {
         String encryptType = request.getParameter("encrypt_type");
         String nonce = request.getParameter("nonce");
         String echostr = request.getParameter("echostr");
-        logger.info("signature="+signature+"&timestamp="+timestamp+"&nonce="+nonce+"&echostr="+echostr);
+        logger.info("signature="+signature+"&timestamp="+timestamp+"&nonce="+nonce+"&encryptType="+encryptType+"&echostr="+echostr);
         PrintWriter out = null;
         try{
             out = response.getWriter();

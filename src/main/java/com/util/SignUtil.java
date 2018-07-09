@@ -106,7 +106,10 @@ public class SignUtil {
 			pc = new WXBizMsgCrypt(token, ConstantParam.encodingAESKey, ConstantParam.appid);
 			result = pc.decryptMsg(msgSignature, timeStamp, nonce, encrypt_msg);
 		} catch (AesException e) {
-
+			System.out.println(e.getCode());
+			e.printStackTrace();
+		}
+		catch (Exception e){
 			e.printStackTrace();
 		}
 		return result;
@@ -127,6 +130,10 @@ public class SignUtil {
 			result = pc.encryptMsg(replayMsg, timeStamp, nonce);
 		} catch (AesException e) {
 
+			System.out.println(e.getCode());
+			e.printStackTrace();
+		}
+		catch (Exception e){
 			e.printStackTrace();
 		}
 		return result;

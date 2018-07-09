@@ -183,42 +183,57 @@ public class MessageUtil {
 		return xstream.toXML(articlesMessage);
 	}
 
-	public static Map<String, String> parseXmlCrypt(HttpServletRequest request) throws Exception {
+	public static Map<String, String> parseXmlCrypt(HttpServletRequest request) {
 		// 将解析结果存储在HashMap中
 		Map<String, String> map = new HashMap<String, String>();
-		// 从request中取得输入流
-		InputStream inputStream = request.getInputStream();
-		BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream));
-		String line;
-		StringBuffer buf=new StringBuffer();
-		while((line=reader.readLine())!=null){
-			buf.append(line);
-		}
-		reader.close();
-		inputStream.close();
-		WXBizMsgCrypt wxCeypt=MessageUtil.getWxCrypt();
-		// 微信加密签名
-		String msgSignature = request.getParameter("msg_signature");
-		// 时间戳
-		String timestamp = request.getParameter("timestamp");
-		// 随机数
-		String nonce = request.getParameter("nonce");
-		String respXml=wxCeypt.decryptMsg(msgSignature, timestamp, nonce, buf.toString());
-		//SAXReader reader = new SAXReader();
-		Document document =DocumentHelper.parseText(respXml);
-		// 得到xml根元素
-		Element root = document.getRootElement();
-		// 得到根元素的所有子节点
-		List<Element> elementList = root.elements();
-		// 遍历所有子节点
-		for (Element e : elementList)
-			map.put(e.getName(), e.getText());
-		// 释放资源
-
-		if(null!=inputStream){
+		InputStream inputStream = null;
+		try{
+			// 从request中取得输入流
+			inputStream=request.getInputStream();
+			BufferedReader reader=new BufferedReader(new InputStreamReader(inputStream));
+			String line;
+			StringBuffer buf=new StringBuffer();
+			while((line=reader.readLine())!=null){
+				buf.append(line);
+			}
+			reader.close();
 			inputStream.close();
-			inputStream = null;
+			WXBizMsgCrypt wxCeypt=MessageUtil.getWxCrypt();
+			// 微信加密签名
+			String msgSignature = request.getParameter("signature");
+			// 时间戳
+			String timestamp = request.getParameter("timestamp");
+			// 随机数
+			String nonce = request.getParameter("nonce");
+			logger.info("11signature="+msgSignature+"&timestamp="+timestamp+"&nonce="+nonce);
+			String respXml=wxCeypt.decryptMsg(msgSignature, timestamp, nonce, buf.toString());
+			//SAXReader reader = new SAXReader();
+			Document document =DocumentHelper.parseText(respXml);
+			// 得到xml根元素
+			Element root = document.getRootElement();
+			// 得到根元素的所有子节点
+			List<Element> elementList = root.elements();
+			// 遍历所有子节点
+			for (Element e : elementList)
+				map.put(e.getName(), e.getText());
+
 		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally {
+
+			if(null!=inputStream){
+				try{
+					inputStream.close();
+					inputStream = null;
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+		}
+
 		return map;
 
 	}
@@ -234,9 +249,12 @@ public class MessageUtil {
 		} catch (AesException e) {
 
 			// TODO Auto-generated catch block
-
+			System.out.println(e.getCode());
 			e.printStackTrace();
 
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		}
 
 		return crypt;
